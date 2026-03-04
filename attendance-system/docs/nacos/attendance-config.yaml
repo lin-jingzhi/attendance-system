@@ -1,0 +1,30 @@
+# 考勤系统业务配置
+attendance:
+  # 默认考勤规则
+  default-rule:
+    work-start-time: "09:00:00"
+    work-end-time: "18:00:00"
+    late-threshold: 30
+    early-leave-threshold: 30
+  
+  # 统计配置
+  statistics:
+    # 每月工作日（简化处理，实际应根据节假日计算）
+    work-days-per-month: 22
+    # 自动生成统计的日期（每月最后一天）
+    auto-generate-day: 28
+  
+  # 接口限流配置
+  rate-limit:
+    # 打卡接口QPS限制
+    clock-in-qps: 30
+    # 导入接口QPS限制
+    import-qps: 10
+    # 导出接口QPS限制
+    export-qps: 5
+
+# 日志配置
+logging:
+  level:
+    com.example.attendance: info
+    org.springframework.data.redis: warn

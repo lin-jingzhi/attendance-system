@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: attendance-system
+  
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/attendance_db?useUnicode=true&characterEncoding=utf8
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:password}
+  
+  redis:
+    host: localhost
+    port: 6379
+    password: ${REDIS_PASSWORD:}
+    database: 0
+
+server:
+  port: 8080
+  servlet:
+    context-path: /attendance
+
+logging:
+  level:
+    com.example.attendance: info

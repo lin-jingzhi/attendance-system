@@ -1,0 +1,65 @@
+spring:
+  application:
+    name: attendance-system
+  
+  # 数据源配置（通过Nacos动态配置覆盖）
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/attendance_db?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:password}
+  
+  # Redis配置（通过Nacos动态配置覆盖）
+  redis:
+    host: localhost
+    port: 6379
+    password: ${REDIS_PASSWORD:}
+    database: 0
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0
+    timeout: 3000ms
+
+  # MyBatis Plus配置
+  mybatis-plus:
+    configuration:
+      map-underscore-to-camel-case: true
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    global-config:
+      db-config:
+        id-type: auto
+        logic-delete-field: deleted
+        logic-delete-value: 1
+        logic-not-delete-value: 0
+
+# Nacos配置中心
+nacos:
+  config:
+    server-addr: localhost:8848
+    namespace: 
+    group: DEFAULT_GROUP
+    file-extension: yaml
+
+# Sentinel配置
+sentinel:
+  transport:
+    dashboard: localhost:8080
+    port: 8719
+  eager: true
+
+# 日志配置
+logging:
+  level:
+    com.example.attendance: debug
+    org.springframework.data.redis: debug
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{50} - %msg%n"
+
+# 服务器配置
+server:
+  port: 8080
+  servlet:
+    context-path: /attendance

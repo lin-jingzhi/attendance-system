@@ -1,0 +1,28 @@
+# Spring Cloud配置
+spring:
+  application:
+    name: attendance-system
+  
+  # Nacos配置中心
+  cloud:
+    nacos:
+      config:
+        server-addr: ${nacos.config.server-addr:localhost:8848}
+        namespace: ${nacos.config.namespace:}
+        group: ${nacos.config.group:DEFAULT_GROUP}
+        file-extension: ${nacos.config.file-extension:yaml}
+        # 共享配置
+        shared-configs:
+          - data-id: redis-config.yaml
+            group: DEFAULT_GROUP
+            refresh: true
+          - data-id: datasource-config.yaml
+            group: DEFAULT_GROUP
+            refresh: true
+          - data-id: attendance-config.yaml
+            group: DEFAULT_GROUP
+            refresh: true
+
+# 激活配置
+profiles:
+  active: dev
